@@ -27,9 +27,10 @@ class Chunk: SKNode {
     var chunkSize: CGSize!
     var tileSize: CGSize!
     var isShown: Bool
+    
+    var tiles = [Tile]()
 
     init(location: CGPoint, tileSize: CGSize, chunkSize: CGSize){
-        
         self.tileSize = tileSize
         self.chunkSize = chunkSize
         self.chunkLocation = location
@@ -41,14 +42,17 @@ class Chunk: SKNode {
         
         let greenTexture = SKTexture(imageNamed: "Grass")
         greenDef = SKTileDefinition(texture: greenTexture, size: tileSize)
+        greenDef.name = "Grass"
         greenGrp = SKTileGroup(tileDefinition: greenDef)
         
         let blueTexture = SKTexture(imageNamed: "Water")
         blueDef = SKTileDefinition(texture: blueTexture, size: tileSize)
+        blueDef.name = "Water"
         blueGrp = SKTileGroup(tileDefinition: blueDef)
         
         let brownTexture = SKTexture(imageNamed: "TreeTile")
         brownDef = SKTileDefinition(texture: brownTexture, size: tileSize)
+        brownDef.name = "Trees"
         brownGrp = SKTileGroup(tileDefinition: brownDef)
         
         
@@ -57,6 +61,7 @@ class Chunk: SKNode {
                                 columns: Int(chunkSize.width),
                                 rows: Int(chunkSize.height),
                                 tileSize: tileSize)
+        tileMap.anchorPoint = CGPoint(x: 0, y: 0)
         addChild(tileMap)
     }
     
@@ -93,18 +98,23 @@ class Chunk: SKNode {
                 
                 if noiseValue < -0.7 {
                     tileMap.setTileGroup(blueGrp, andTileDefinition: blueDef, forColumn: x, row: y)
+                    tiles.append(Tile(type: TileType.WATER, location: CGPoint(x: x, y: y)))
                 }
                 else if noiseValue > 0.8 {
                     tileMap.setTileGroup(brownGrp, andTileDefinition: brownDef, forColumn: x, row: y)
+                    tiles.append(Tile(type: TileType.TREES, location: CGPoint(x: x, y: y)))
                 }
                 else {
                     tileMap.setTileGroup(greenGrp, andTileDefinition: greenDef, forColumn: x, row: y)
+                    tiles.append(Tile(type: TileType.GRASS, location: CGPoint(x: x, y: y)))
                 }
             }
         }
     }
     
-    func getTile(at point: CGPoint) {
-        
+    func getTile(at point: CGPoint) -> Tile {
+        let index = Int(point.x + point.y * chunkSize.width)
+        print(point, tiles[index].getTypeString() )
+        return tiles[index]
     }
 }

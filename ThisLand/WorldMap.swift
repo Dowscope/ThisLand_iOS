@@ -32,7 +32,7 @@ class WorldMap: SKNode {
                 addChunk(chunkLocation: CGPoint(x: x, y: y))
             }
         }
-        
+        //addChunk(chunkLocation: CGPoint(x: 0, y: 0))
         setCenterChunk(location: CGPoint(x: 0, y: 0))
     }
     
@@ -94,6 +94,62 @@ class WorldMap: SKNode {
         setCenterChunk(location: CGPoint(x: chunkPositionX, y: chunkPositionY))
     }
     
+    func getTile(at point: CGPoint) -> SKTileDefinition? {
+        
+        var chunkPosX = Int((point.x / tileSize.width) / chunkSize.width)
+        if point.x < 0 { chunkPosX -= 1 }
+        var chunkPosY = Int((point.y / tileSize.height) / chunkSize.height)
+        if point.y < 0 { chunkPosY -= 1 }
+        
+        for chunk in chunks {
+            if chunk.chunkLocation == CGPoint(x: chunkPosX, y: chunkPosY) {
+                let col = CGFloat(Int((point.x - chunk.position.x) / tileSize.width))
+                let row = CGFloat(Int((point.y - chunk.position.y) / tileSize.height))
+                
+                //return chunk.getTile(at: CGPoint(x: col, y: row))
+                return chunk.tileMap.tileDefinition(atColumn: Int(col), row: Int(row))
+                
+            }
+        }
+        return nil
+    }
+    
+    var selectionMade = false
+    var selection: SKShapeNode!
+    
+    func drawSelectionBox(at point: CGPoint) -> SKTileDefinition? {
+        
+        if selectionMade {
+            selection.removeFromParent()
+            selection = nil
+            selectionMade = false
+        }
+        if let tile = getTile(at: point) {
+            var newP = point
+            
+            if newP.x < 0 { newP.x -= tileSize.width }
+            if newP.y < 0 { newP.y -= tileSize.height }
+            
+            let x = CGFloat(Int(newP.x / tileSize.width)) * tileSize.width
+            let y = CGFloat(Int(newP.y / tileSize.height)) * tileSize.height
+            let rect = CGRect(x: x, y: y, width: tileSize.width, height: tileSize.height)
+            
+            selection = SKShapeNode(rect: rect, cornerRadius: 10)
+            selection.strokeColor = .red
+            selection.lineWidth = 5
+            selectionMade = true
+            addChild(selection)
+            
+            if tile.name == "Grass" {
+                selection.strokeColor = .green
+            }
+            
+            return tile
+        }else {
+            print("Tile not found")
+        }
+        return nil
+    }
 }
 
 

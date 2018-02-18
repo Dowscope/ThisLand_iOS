@@ -13,12 +13,16 @@ class GameScene: SKScene {
     
     let world = WorldMap()
     let mainCamera = SKCameraNode()
+    let uiManager = UIManager()
     
     var cameraScaleCurrent: CGFloat = 1
     
     override func didMove(to view: SKView) {
         backgroundColor = .black
-        anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        anchorPoint = CGPoint.zero
+        
+        uiManager.zPosition = 10
+        addChild(uiManager)
         
         addChild(mainCamera)
         mainCamera.addChild(world)
@@ -37,17 +41,25 @@ class GameScene: SKScene {
     }
     
     func addPoints(pointA: CGPoint, pointB: CGPoint) -> CGPoint {
-        let x = pointA.x - pointB.x
-        let y = pointA.y + pointB.y
+        let x = (-1 * pointA.x) + pointB.x
+        let y = (-1 * pointA.y) + pointB.y
         
-        let intX = Int(x / world.chunkSize.width)
-        let intY = Int(y / world.chunkSize.height)
-        
-        return CGPoint(x: intX, y: intY)
+        return CGPoint(x: x, y: y)
     }
     
     @objc func handleTap(sender: UITapGestureRecognizer){
-        print(mainCamera.position)
+        var location = sender.location(in: view)
+        let uiLoc = view?.convert(location, to: scene!)
+        print(uiLoc!, uiManager.toggleBTN.position)
+        
+        if uiManager.toggleBTN.contains(uiLoc!) {
+            
+            uiManager.toggle()
+        } else {
+            location = (view?.convert(location, from: scene!))!
+            let tile = world.drawSelectionBox(at: addPoints(pointA: mainCamera.position, pointB: location))
+            uiManager.tileSelection(of: tile!)
+        }
     }
     
     @objc func move(sender: UIPanGestureRecognizer){
@@ -55,6 +67,7 @@ class GameScene: SKScene {
             var newPosition = mainCamera.position
             newPosition.y *= -1
             sender.setTranslation(newPosition, in: view)
+            uiManager.closeSelectionInfo()
         }
         if sender.state == .changed {
             var newPosition = sender.translation(in: view)

@@ -17,6 +17,8 @@
 		930FB3CC201EA8BF00BCDCA9 /* ThisLandUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FB3CB201EA8BF00BCDCA9 /* ThisLandUITests.swift */; };
 		930FB3DA20214C9E00BCDCA9 /* WorldMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FB3D920214C9E00BCDCA9 /* WorldMap.swift */; };
 		930FB3DC20214FA400BCDCA9 /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FB3DB20214FA400BCDCA9 /* Chunk.swift */; };
+		9354CC68202A33B100E94B28 /* UIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354CC67202A33B100E94B28 /* UIManager.swift */; };
+		9354CC6A202A49E700E94B28 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354CC69202A49E700E94B28 /* Tile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		930FB3CD201EA8BF00BCDCA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		930FB3D920214C9E00BCDCA9 /* WorldMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMap.swift; sourceTree = "<group>"; };
 		930FB3DB20214FA400BCDCA9 /* Chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chunk.swift; sourceTree = "<group>"; };
+		9354CC67202A33B100E94B28 /* UIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIManager.swift; sourceTree = "<group>"; };
+		9354CC69202A49E700E94B28 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 				930FB3B7201EA8BF00BCDCA9 /* Info.plist */,
 				930FB3D920214C9E00BCDCA9 /* WorldMap.swift */,
 				930FB3DB20214FA400BCDCA9 /* Chunk.swift */,
+				9354CC67202A33B100E94B28 /* UIManager.swift */,
+				9354CC69202A49E700E94B28 /* Tile.swift */,
 			);
 			path = ThisLand;
 			sourceTree = "<group>";
@@ -271,8 +277,10 @@
 				930FB3AC201EA8BF00BCDCA9 /* GameScene.swift in Sources */,
 				930FB3AE201EA8BF00BCDCA9 /* GameViewController.swift in Sources */,
 				930FB3DC20214FA400BCDCA9 /* Chunk.swift in Sources */,
+				9354CC6A202A49E700E94B28 /* Tile.swift in Sources */,
 				930FB3DA20214C9E00BCDCA9 /* WorldMap.swift in Sources */,
 				930FB3A6201EA8BF00BCDCA9 /* AppDelegate.swift in Sources */,
+				9354CC68202A33B100E94B28 /* UIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
