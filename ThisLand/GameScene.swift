@@ -13,7 +13,7 @@ class GameScene: SKScene {
     
     let world = WorldMap()
     let mainCamera = SKCameraNode()
-    let uiManager = UIManager()
+    var uiManager: UIManager!
     
     var cameraScaleCurrent: CGFloat = 1
     
@@ -21,6 +21,7 @@ class GameScene: SKScene {
         backgroundColor = .black
         anchorPoint = CGPoint.zero
         
+        uiManager = UIManager(rect: view.bounds)
         uiManager.zPosition = 10
         addChild(uiManager)
         
@@ -32,9 +33,6 @@ class GameScene: SKScene {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(sender:)))
         self.view?.addGestureRecognizer(tapGesture)
-        
-//        let scaleGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.scale(sender:)))
-//        self.view?.addGestureRecognizer(scaleGesture)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -76,24 +74,6 @@ class GameScene: SKScene {
         }
         if sender.state == .ended {
             world.showChunksAround(camera: mainCamera)
-            //print(mainCamera.position, mainCamera.xScale)
         }
     }
-    //var newScale = CGFloat(0)
-    
-//    @objc func scale(sender: UIPinchGestureRecognizer){
-//
-//        if sender.state == .began {
-//        }
-//        if sender.state == .changed {
-//            newScale += sender.velocity
-//            print(newScale)
-//            if newScale > 0.9 { newScale = 0.9 }
-//            if newScale < 0.1 { newScale = 0.1 }
-//            mainCamera.setScale(newScale)
-//
-//        }
-//        if sender.state == .ended {
-//        }
-//    }
 }
