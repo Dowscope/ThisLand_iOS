@@ -94,7 +94,7 @@ class WorldMap: SKNode {
         setCenterChunk(location: CGPoint(x: chunkPositionX, y: chunkPositionY))
     }
     
-    func getTile(at point: CGPoint) -> SKTileDefinition? {
+    func getTile(at point: CGPoint) -> Tile? {
         
         var chunkPosX = Int((point.x / tileSize.width) / chunkSize.width)
         if point.x < 0 { chunkPosX -= 1 }
@@ -106,8 +106,8 @@ class WorldMap: SKNode {
                 let col = CGFloat(Int((point.x - chunk.position.x) / tileSize.width))
                 let row = CGFloat(Int((point.y - chunk.position.y) / tileSize.height))
                 
-                //return chunk.getTile(at: CGPoint(x: col, y: row))
-                return chunk.tileMap.tileDefinition(atColumn: Int(col), row: Int(row))
+                return chunk.getTile(at: CGPoint(x: col, y: row))
+                //return chunk.tileMap.tileDefinition(atColumn: Int(col), row: Int(row))
                 
             }
         }
@@ -117,7 +117,7 @@ class WorldMap: SKNode {
     var selectionMade = false
     var selection: SKShapeNode!
     
-    func drawSelectionBox(at point: CGPoint) -> SKTileDefinition? {
+    func drawSelectionBox(at point: CGPoint) -> Tile? {
         
         if selectionMade {
             selection.removeFromParent()
@@ -139,8 +139,7 @@ class WorldMap: SKNode {
             selection.lineWidth = 5
             selectionMade = true
             addChild(selection)
-            
-            if tile.name == "Grass" {
+            if tile.getTypeString() == "Grass" {
                 selection.strokeColor = .green
             }
             

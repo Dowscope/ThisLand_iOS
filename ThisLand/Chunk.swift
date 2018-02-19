@@ -112,9 +112,13 @@ class Chunk: SKNode {
         }
     }
     
-    func getTile(at point: CGPoint) -> Tile {
-        let index = Int(point.x + point.y * chunkSize.width)
-        print(point, tiles[index].getTypeString() )
-        return tiles[index]
+    func getTile(at point: CGPoint) -> Tile? {
+        for tile in tiles {
+            if tile.location.equalTo(point) {
+                return tile
+            }
+        }
+        print("Chunk: getTile -> Tile Not Found")
+        return nil
     }
 }

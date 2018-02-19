@@ -20,9 +20,29 @@ class Tile {
     let type: TileType
     let location: CGPoint
     
+    // Properties of the tile
+    var isHarvestable: Bool
+    var isWalkable: Bool
+    var isBuildable: Bool
+    
     init(type: TileType, location: CGPoint) {
         self.type = type
         self.location = location
+        
+        switch type {
+        case .GRASS:
+            isWalkable = true
+            isHarvestable = false
+            isBuildable = true
+        case .TREES:
+            isWalkable = false
+            isHarvestable = true
+            isBuildable = false
+        case .WATER:
+            isWalkable = false
+            isHarvestable = false
+            isBuildable = false
+        }
     }
     
     func getTypeString() -> String {

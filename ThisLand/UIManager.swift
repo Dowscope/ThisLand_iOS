@@ -15,11 +15,14 @@ class UIManager: SKNode {
     let toggleBTN: SKShapeNode
     var toolBarIsActive = false
     
-    let selectionInfo: SKShapeNode
-    let selectionTitle: SKLabelNode
-    let selectionTileName: SKLabelNode
+    var selectionInfo: SKShapeNode!
+    var selectionBackGround: SKShapeNode!
+    var selectionTitle: SKLabelNode!
+    var selectionTileName: SKLabelNode!
+    var selectionIsBuildable: SKLabelNode!
+    var selectionIsHarvestable: SKLabelNode!
     
-    let toolBarMenu: SKShapeNode
+    var toolBarMenu: SKShapeNode!
     
     var statusBar: SKShapeNode!
     var status_DayLbl: SKLabelNode!
@@ -32,34 +35,54 @@ class UIManager: SKNode {
         toggleBTN.position = CGPoint(x: 10, y: 10)
         toggleBTN.fillColor = .red
         
+        super.init()
+        
         selectionInfo = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 150, height: 200))
-        selectionInfo.fillColor = .gray
-        selectionInfo.lineWidth = 0
+        selectionInfo.lineWidth = 4
+        selectionInfo.position = CGPoint(x: rect.width - 160, y: rect.height - 250)
+        selectionInfo.alpha = 1
+        
+        selectionBackGround = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 150, height: 200))
+        selectionBackGround.fillColor = .lightGray
+        selectionBackGround.lineWidth = 0
+        selectionBackGround.position = CGPoint.zero
+        selectionInfo.alpha = 1
         
         selectionTitle = SKLabelNode(text: "Tile Selected")
         selectionTitle.horizontalAlignmentMode = .center
         selectionTitle.fontSize = 20
         selectionTitle.fontName = "Georgia Bold"
-        selectionTitle.color = .white
+        selectionTitle.fontColor = .white
         selectionTitle.position = CGPoint(x: 75, y: 170)
         
         selectionTileName = SKLabelNode(text: "Tile: ")
         selectionTileName.horizontalAlignmentMode = .left
         selectionTileName.fontSize = 16
         selectionTileName.fontName = "Georgia Bold"
-        selectionTileName.color = .white
+        selectionTileName.fontColor = .white
         selectionTileName.position = CGPoint(x: 5, y: 140)
         selectionTileName.alpha = 1
         
-        toolBarMenu = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 600, height: 50), cornerRadius: 10)
+        selectionIsBuildable = SKLabelNode(text: "Building Allowed")
+        selectionIsBuildable.horizontalAlignmentMode = .left
+        selectionIsBuildable.fontSize = 12
+        selectionIsBuildable.fontName = "Georgia Bold"
+        selectionIsBuildable.fontColor = SKColor.green
+        selectionIsBuildable.position = CGPoint(x: 5, y: 120)
+        selectionIsBuildable.alpha = 1
+        
+        selectionIsHarvestable = SKLabelNode(text: "Not Harvestable")
+        selectionIsHarvestable.horizontalAlignmentMode = .left
+        selectionIsHarvestable.fontSize = 12
+        selectionIsHarvestable.fontName = "Georgia Bold"
+        selectionIsHarvestable.fontColor = SKColor.red
+        selectionIsHarvestable.position = CGPoint(x: 5, y: 108)
+        selectionIsHarvestable.alpha = 1
+        
+        
+        toolBarMenu = SKShapeNode(rect: CGRect(x: 0, y: 0, width: rect.width - 75, height: 50), cornerRadius: 10)
         toolBarMenu.fillColor = .gray
         toolBarMenu.lineWidth = 0
-        
-        super.init()
-        
-        selectionInfo.position = CGPoint(x: 500, y: 150)
-        selectionInfo.alpha = 0.5
-        
         toolBarMenu.position = CGPoint(x: 50, y: 10)
         toolBarMenu.isHidden = true
         
@@ -72,20 +95,26 @@ class UIManager: SKNode {
         status_DayLbl.horizontalAlignmentMode = .left
         status_DayLbl.fontSize = 16
         status_DayLbl.fontName = "Georgia Bold"
-        status_DayLbl.color = SKColor.yellow
+        status_DayLbl.fontColor = SKColor.yellow
         status_DayLbl.position = CGPoint(x: 5, y: 3)
+        status_DayLbl.zPosition = 2
         
         status_MoneyLbl = SKLabelNode(text: "$10000.00")
         status_MoneyLbl.horizontalAlignmentMode = .right
         status_MoneyLbl.fontSize = 16
         status_MoneyLbl.fontName = "Georgia Bold"
-        status_MoneyLbl.color = SKColor.green
+        status_MoneyLbl.fontColor = SKColor.green
         status_MoneyLbl.position = CGPoint(x: rect.width - 5, y: 3)
+        status_MoneyLbl.zPosition = 2
         
         addChild(toggleBTN)
+        
         addChild(selectionInfo)
+        selectionInfo.addChild(selectionBackGround)
         selectionInfo.addChild(selectionTitle)
         selectionInfo.addChild(selectionTileName)
+        selectionInfo.addChild(selectionIsBuildable)
+        selectionInfo.addChild(selectionIsHarvestable)
         
         addChild(toolBarMenu)
         
@@ -108,11 +137,27 @@ class UIManager: SKNode {
         }
     }
     
-    func tileSelection(of tile: SKTileDefinition) {
-        let name = tile.name
-        let preName = "Tile: "
-        selectionTileName.text = preName + name!
+    func tileSelection(of tile: Tile) {
+        let name = tile.getTypeString()
+        let preName = "Type: "
+        selectionTileName.text = preName + name
         selectionInfo.isHidden = false
+        
+        if tile.isBuildable {
+            selectionIsBuildable.text = "Building Allowed"
+            selectionIsBuildable.fontColor = .green
+        } else {
+            selectionIsBuildable.text = "Building Not Allowed"
+            selectionIsBuildable.fontColor = .red
+        }
+        
+        if tile.isHarvestable {
+            selectionIsHarvestable.text = "Harvestable"
+            selectionIsHarvestable.fontColor = .green
+        } else {
+            selectionIsHarvestable.text = "Not Harvestable"
+            selectionIsHarvestable.fontColor = .red
+        }
     }
     
     func closeSelectionInfo() {
