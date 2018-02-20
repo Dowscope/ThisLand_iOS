@@ -65,9 +65,8 @@ class GameScene: SKScene {
             
             if uiManager.isToolSelected {
                 if uiManager.toolSelected == .WORKER {
-                    location = (view?.convert(location, from: scene!))!
-                    player.addWorker(at: location)
-                    return
+                    let toolLoc = (view?.convert(location, from: scene!))!
+                    //player.addWorker(at: location)
                 }
             }
         }

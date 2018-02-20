@@ -197,9 +197,15 @@ class UIManager: SKNode {
     func toolSelect(type: ToolType) {
         switch type {
         case .WORKER:
-            tool_worker.strokeColor = .green
-            isToolSelected = true
-            toolSelected = .WORKER
+            if isToolSelected {
+                tool_worker.strokeColor = .black
+                isToolSelected = false
+            }
+            else {
+                tool_worker.strokeColor = .green
+                isToolSelected = true
+                toolSelected = .WORKER
+            }
         }
     }
     
