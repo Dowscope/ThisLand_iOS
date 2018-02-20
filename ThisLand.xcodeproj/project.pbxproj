@@ -111,14 +111,10 @@
 		930FB3A4201EA8BF00BCDCA9 /* ThisLand */ = {
 			isa = PBXGroup;
 			children = (
+				933FCD4A203CAB330033484E /* System */,
 				93288BB2203BBD9C00A35D43 /* Components */,
 				93288BB1203BBD8200A35D43 /* Entities */,
-				930FB3A5201EA8BF00BCDCA9 /* AppDelegate.swift */,
 				930FB3AB201EA8BF00BCDCA9 /* GameScene.swift */,
-				930FB3AD201EA8BF00BCDCA9 /* GameViewController.swift */,
-				930FB3AF201EA8BF00BCDCA9 /* Main.storyboard */,
-				930FB3B2201EA8BF00BCDCA9 /* Assets.xcassets */,
-				930FB3B4201EA8BF00BCDCA9 /* LaunchScreen.storyboard */,
 				930FB3B7201EA8BF00BCDCA9 /* Info.plist */,
 				930FB3D920214C9E00BCDCA9 /* WorldMap.swift */,
 				930FB3DB20214FA400BCDCA9 /* Chunk.swift */,
@@ -160,6 +156,18 @@
 			children = (
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		933FCD4A203CAB330033484E /* System */ = {
+			isa = PBXGroup;
+			children = (
+				930FB3A5201EA8BF00BCDCA9 /* AppDelegate.swift */,
+				930FB3AF201EA8BF00BCDCA9 /* Main.storyboard */,
+				930FB3B2201EA8BF00BCDCA9 /* Assets.xcassets */,
+				930FB3AD201EA8BF00BCDCA9 /* GameViewController.swift */,
+				930FB3B4201EA8BF00BCDCA9 /* LaunchScreen.storyboard */,
+			);
+			path = System;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
