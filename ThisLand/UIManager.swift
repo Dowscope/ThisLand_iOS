@@ -8,12 +8,18 @@
 
 import SpriteKit
 
+enum ToolType {
+    case WORKER
+}
+
 class UIManager: SKNode {
     
     let windowSize: CGRect
     
     let toggleBTN: SKShapeNode
     var toolBarIsActive = false
+    var isToolSelected = false
+    var toolSelected: ToolType = .WORKER
     
     var selectionInfo: SKShapeNode!
     var selectionBackGround: SKShapeNode!
@@ -23,6 +29,8 @@ class UIManager: SKNode {
     var selectionIsHarvestable: SKLabelNode!
     
     var toolBarMenu: SKShapeNode!
+    var tool_worker: SKShapeNode!
+    var tool_worker_sprite: SKSpriteNode!
     
     var statusBar: SKShapeNode!
     var status_DayLbl: SKLabelNode!
@@ -46,7 +54,6 @@ class UIManager: SKNode {
         selectionBackGround.fillColor = .lightGray
         selectionBackGround.lineWidth = 0
         selectionBackGround.position = CGPoint.zero
-        selectionInfo.alpha = 1
         
         selectionTitle = SKLabelNode(text: "Tile Selected")
         selectionTitle.horizontalAlignmentMode = .center
@@ -86,6 +93,17 @@ class UIManager: SKNode {
         toolBarMenu.position = CGPoint(x: 50, y: 10)
         toolBarMenu.isHidden = true
         
+        tool_worker = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 40, height: 40), cornerRadius: 10)
+        tool_worker.fillColor = .white
+        tool_worker.lineWidth = 4
+        tool_worker.strokeColor = .black
+        tool_worker.position = CGPoint(x: 5, y: 5)
+        tool_worker.name = "Tool_Worker"
+        
+        tool_worker_sprite = SKSpriteNode(imageNamed: "Worker_Down_Stand")
+        tool_worker_sprite.position = CGPoint(x: 4, y: 4)
+        tool_worker_sprite.anchorPoint = CGPoint.zero
+        
         statusBar = SKShapeNode(rect: CGRect(x: 0, y: 0, width: rect.width, height: 20))
         statusBar.fillColor = .blue
         statusBar.lineWidth = 0
@@ -117,6 +135,8 @@ class UIManager: SKNode {
         selectionInfo.addChild(selectionIsHarvestable)
         
         addChild(toolBarMenu)
+        toolBarMenu.addChild(tool_worker)
+        tool_worker.addChild(tool_worker_sprite)
         
         addChild(statusBar)
         statusBar.addChild(status_DayLbl)
@@ -130,6 +150,8 @@ class UIManager: SKNode {
             toolBarIsActive = false
             toggleBTN.fillColor = .red
             toolBarMenu.isHidden = true
+            isToolSelected = false
+            tool_worker.strokeColor = .black
         }else {
             toolBarIsActive = true
             toggleBTN.fillColor = .green
@@ -170,6 +192,15 @@ class UIManager: SKNode {
     
     func updateDayLabel(amount: Int){
         status_DayLbl.text = "Day \(amount)"
+    }
+    
+    func toolSelect(type: ToolType) {
+        switch type {
+        case .WORKER:
+            tool_worker.strokeColor = .green
+            isToolSelected = true
+            toolSelected = .WORKER
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

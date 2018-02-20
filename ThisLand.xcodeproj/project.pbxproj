@@ -17,6 +17,8 @@
 		930FB3CC201EA8BF00BCDCA9 /* ThisLandUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FB3CB201EA8BF00BCDCA9 /* ThisLandUITests.swift */; };
 		930FB3DA20214C9E00BCDCA9 /* WorldMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FB3D920214C9E00BCDCA9 /* WorldMap.swift */; };
 		930FB3DC20214FA400BCDCA9 /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FB3DB20214FA400BCDCA9 /* Chunk.swift */; };
+		93288BAE203BB73400A35D43 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93288BAD203BB73400A35D43 /* Worker.swift */; };
+		93288BB0203BB81300A35D43 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93288BAF203BB81300A35D43 /* Player.swift */; };
 		9354CC68202A33B100E94B28 /* UIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354CC67202A33B100E94B28 /* UIManager.swift */; };
 		9354CC6A202A49E700E94B28 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354CC69202A49E700E94B28 /* Tile.swift */; };
 /* End PBXBuildFile section */
@@ -55,6 +57,8 @@
 		930FB3CD201EA8BF00BCDCA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		930FB3D920214C9E00BCDCA9 /* WorldMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMap.swift; sourceTree = "<group>"; };
 		930FB3DB20214FA400BCDCA9 /* Chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chunk.swift; sourceTree = "<group>"; };
+		93288BAD203BB73400A35D43 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
+		93288BAF203BB81300A35D43 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		9354CC67202A33B100E94B28 /* UIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIManager.swift; sourceTree = "<group>"; };
 		9354CC69202A49E700E94B28 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,6 +111,8 @@
 		930FB3A4201EA8BF00BCDCA9 /* ThisLand */ = {
 			isa = PBXGroup;
 			children = (
+				93288BB2203BBD9C00A35D43 /* Components */,
+				93288BB1203BBD8200A35D43 /* Entities */,
 				930FB3A5201EA8BF00BCDCA9 /* AppDelegate.swift */,
 				930FB3AB201EA8BF00BCDCA9 /* GameScene.swift */,
 				930FB3AD201EA8BF00BCDCA9 /* GameViewController.swift */,
@@ -118,6 +124,7 @@
 				930FB3DB20214FA400BCDCA9 /* Chunk.swift */,
 				9354CC67202A33B100E94B28 /* UIManager.swift */,
 				9354CC69202A49E700E94B28 /* Tile.swift */,
+				93288BAF203BB81300A35D43 /* Player.swift */,
 			);
 			path = ThisLand;
 			sourceTree = "<group>";
@@ -138,6 +145,21 @@
 				930FB3CD201EA8BF00BCDCA9 /* Info.plist */,
 			);
 			path = ThisLandUITests;
+			sourceTree = "<group>";
+		};
+		93288BB1203BBD8200A35D43 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				93288BAD203BB73400A35D43 /* Worker.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		93288BB2203BBD9C00A35D43 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,11 +297,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				930FB3AC201EA8BF00BCDCA9 /* GameScene.swift in Sources */,
+				93288BAE203BB73400A35D43 /* Worker.swift in Sources */,
 				930FB3AE201EA8BF00BCDCA9 /* GameViewController.swift in Sources */,
 				930FB3DC20214FA400BCDCA9 /* Chunk.swift in Sources */,
 				9354CC6A202A49E700E94B28 /* Tile.swift in Sources */,
 				930FB3DA20214C9E00BCDCA9 /* WorldMap.swift in Sources */,
 				930FB3A6201EA8BF00BCDCA9 /* AppDelegate.swift in Sources */,
+				93288BB0203BB81300A35D43 /* Player.swift in Sources */,
 				9354CC68202A33B100E94B28 /* UIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

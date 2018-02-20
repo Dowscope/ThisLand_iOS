@@ -15,6 +15,8 @@ class GameScene: SKScene {
     let mainCamera = SKCameraNode()
     var uiManager: UIManager!
     
+    var player = Player()
+    
     var cameraScaleCurrent: CGFloat = 1
     
     override func didMove(to view: SKView) {
@@ -27,6 +29,7 @@ class GameScene: SKScene {
         
         addChild(mainCamera)
         mainCamera.addChild(world)
+        mainCamera.addChild(player)
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.move(sender:)))
         self.view?.addGestureRecognizer(panGesture)
@@ -48,16 +51,37 @@ class GameScene: SKScene {
     @objc func handleTap(sender: UITapGestureRecognizer){
         var location = sender.location(in: view)
         let uiLoc = view?.convert(location, to: scene!)
-        print(uiLoc!, uiManager.toggleBTN.position)
+        let touchedNode = self.nodes(at: uiLoc!)
+        
+        if uiManager.toolBarIsActive {
+            for node in touchedNode {
+                if let name = node.name {
+                    if name == "Tool_Worker" {
+                        uiManager.toolSelect(type: .WORKER)
+                        return
+                    }
+                }
+            }
+            
+            if uiManager.isToolSelected {
+                if uiManager.toolSelected == .WORKER {
+                    location = (view?.convert(location, from: scene!))!
+                    player.addWorker(at: location)
+                    return
+                }
+            }
+        }
         
         if uiManager.toggleBTN.contains(uiLoc!) {
-            
             uiManager.toggle()
+            
         } else {
             location = (view?.convert(location, from: scene!))!
             let tile = world.drawSelectionBox(at: addPoints(pointA: mainCamera.position, pointB: location))
             uiManager.tileSelection(of: tile!)
         }
+        
+        
     }
     
     @objc func move(sender: UIPanGestureRecognizer){
