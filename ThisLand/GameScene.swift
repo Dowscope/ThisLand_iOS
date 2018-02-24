@@ -15,8 +15,6 @@ class GameScene: SKScene {
     let mainCamera = SKCameraNode()
     var uiManager: UIManager!
     
-    var player = Player()
-    
     var cameraScaleCurrent: CGFloat = 1
     
     override func didMove(to view: SKView) {
@@ -29,7 +27,6 @@ class GameScene: SKScene {
         
         addChild(mainCamera)
         mainCamera.addChild(world)
-        mainCamera.addChild(player)
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.move(sender:)))
         self.view?.addGestureRecognizer(panGesture)
@@ -65,8 +62,10 @@ class GameScene: SKScene {
             
             if uiManager.isToolSelected {
                 if uiManager.toolSelected == .WORKER {
-                    let toolLoc = (view?.convert(location, from: scene!))!
-                    //player.addWorker(at: location)
+                    let loc = (view?.convert(location, to: scene!))!
+                    let added = addPoints(pointA: mainCamera.position, pointB: loc)
+                    world.addPlayerEntity(at: added, .WORKER)
+                    
                 }
             }
         }

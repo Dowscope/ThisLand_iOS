@@ -11,4 +11,13 @@ import GameplayKit
 
 class Worker: GKEntity {
     
+    init(position: CGPoint){
+        super.init()
+        
+        addComponent(SpriteComponent(position, "Worker_Down_Stand"))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

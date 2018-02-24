@@ -23,6 +23,8 @@ class WorldMap: SKNode {
     var tileSize = CGSize(width: 64, height: 64)
     let chunkSize = CGSize(width: 16, height: 16)
     
+    let player = Player()
+    
     override init() {
         seed = arc4random() % UInt32(INT32_MAX)
         super.init()
@@ -32,8 +34,9 @@ class WorldMap: SKNode {
                 addChunk(chunkLocation: CGPoint(x: x, y: y))
             }
         }
-        //addChunk(chunkLocation: CGPoint(x: 0, y: 0))
         setCenterChunk(location: CGPoint(x: 0, y: 0))
+        
+        addChild(player)
     }
     
     
@@ -142,12 +145,21 @@ class WorldMap: SKNode {
             if tile.getTypeString() == "Grass" {
                 selection.strokeColor = .green
             }
-            
+            print(newP)
             return tile
         }else {
             print("Tile not found")
         }
         return nil
+    }
+    
+    func addPlayerEntity(at point: CGPoint, _ type: EntityType){
+        var newP = point
+        
+        if newP.x < 0 { newP.x -= tileSize.width }
+        if newP.y < 0 { newP.y -= tileSize.height }
+        
+        player.addEntity(location: newP, type: type)
     }
 }
 
