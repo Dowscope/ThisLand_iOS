@@ -9,8 +9,6 @@
 import SpriteKit
 import GameplayKit
 
-
-
 class WorldMap: SKNode {
     let numberOfGeneratedChunks = 1
     let numberOfTilesScreenWidth = 10
@@ -22,6 +20,8 @@ class WorldMap: SKNode {
     
     var tileSize = CGSize(width: 64, height: 64)
     let chunkSize = CGSize(width: 16, height: 16)
+    
+    var avoidNodes = [CGRect]()
     
     let player = Player()
     
@@ -119,6 +119,7 @@ class WorldMap: SKNode {
     
     var selectionMade = false
     var selection: SKShapeNode!
+    var lastSelectionPoint: CGPoint? = nil
     
     func drawSelectionBox(at point: CGPoint) -> Tile? {
         
@@ -141,6 +142,9 @@ class WorldMap: SKNode {
             selection.strokeColor = .red
             selection.lineWidth = 5
             selectionMade = true
+            
+            lastSelectionPoint = CGPoint(x: x, y: y)
+            
             addChild(selection)
             if tile.getTypeString() == "Grass" {
                 selection.strokeColor = .green
@@ -159,7 +163,21 @@ class WorldMap: SKNode {
         if newP.x < 0 { newP.x -= tileSize.width }
         if newP.y < 0 { newP.y -= tileSize.height }
         
-        player.addEntity(location: newP, type: type)
+        player.addEntity(location: newP, type: type, avoidNodes: getAvoidNodes())
+    }
+    
+    func update(dt: TimeInterval){
+        player.update(dt: dt)
+    }
+    
+    func getAvoidNodes() -> [SKNode]{
+        var nodes = [SKNode]()
+        for n in avoidNodes {
+            let s = SKShapeNode(rect: n)
+            nodes.append(s)
+        }
+        
+        return nodes
     }
 }
 

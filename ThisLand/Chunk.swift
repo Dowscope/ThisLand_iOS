@@ -29,6 +29,7 @@ class Chunk: SKNode {
     var isShown: Bool
     
     var tiles = [Tile]()
+    var nodes = [CGRect]()
 
     init(location: CGPoint, tileSize: CGSize, chunkSize: CGSize){
         self.tileSize = tileSize
@@ -99,10 +100,12 @@ class Chunk: SKNode {
                 if noiseValue < -0.7 {
                     tileMap.setTileGroup(blueGrp, andTileDefinition: blueDef, forColumn: x, row: y)
                     tiles.append(Tile(type: TileType.WATER, location: CGPoint(x: x, y: y)))
+                    nodes.append(blueDef.textures.first!.textureRect())
                 }
                 else if noiseValue > 0.8 {
                     tileMap.setTileGroup(brownGrp, andTileDefinition: brownDef, forColumn: x, row: y)
                     tiles.append(Tile(type: TileType.TREES, location: CGPoint(x: x, y: y)))
+                    nodes.append(brownDef.textures.first!.textureRect())
                 }
                 else {
                     tileMap.setTileGroup(greenGrp, andTileDefinition: greenDef, forColumn: x, row: y)

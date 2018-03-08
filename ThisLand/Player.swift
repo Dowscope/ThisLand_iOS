@@ -16,17 +16,23 @@ enum EntityType {
 class Player: SKNode {
     var entities = [GKEntity]()
     
-    func addEntity(location: CGPoint, type: EntityType){
+    func addEntity(location: CGPoint, type: EntityType, avoidNodes: [SKNode]){
         switch type {
         case .WORKER:
-            let w = Worker(position: location)
+            print(avoidNodes)
+            let w = Worker(position: location, jobPosition: JOB_TITLE.GENERAL, avoidNodes: avoidNodes)
+            
             if let sprite = w.component(ofType: SpriteComponent.self)?.sprite {
                 addChild(sprite)
-                print(sprite.position)
             }
             
-            
             entities.append(w)
+        }
+    }
+    
+    func update(dt: TimeInterval) {
+        for e in entities {
+            e.update(deltaTime: dt)
         }
     }
 }

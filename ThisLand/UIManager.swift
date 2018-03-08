@@ -21,6 +21,8 @@ class UIManager: SKNode {
     var isToolSelected = false
     var toolSelected: ToolType = .WORKER
     
+    var lastSelectedTile: Tile? = nil
+    
     var selectionInfo: SKShapeNode!
     var selectionBackGround: SKShapeNode!
     var selectionTitle: SKLabelNode!
@@ -160,6 +162,8 @@ class UIManager: SKNode {
     }
     
     func tileSelection(of tile: Tile) {
+        lastSelectedTile = tile
+        
         let name = tile.getTypeString()
         let preName = "Type: "
         selectionTileName.text = preName + name

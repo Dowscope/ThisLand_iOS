@@ -11,13 +11,21 @@ import GameplayKit
 
 class Worker: GKEntity {
     
-    init(position: CGPoint){
+    init(position: CGPoint, jobPosition: JOB_TITLE, avoidNodes: [SKNode]){
         super.init()
         
         addComponent(SpriteComponent(position, "Worker_Down_Stand"))
+        addComponent(JobComponent(type: jobPosition))
+        addComponent(MoveComponent(maxSpeed: 0.0001, maxAcc: 0.0001, radius: 100, avoid: avoidNodes))
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func update(deltaTime seconds: TimeInterval) {
+        for c in components {
+            c.update(deltaTime: seconds)
+        }
     }
 }

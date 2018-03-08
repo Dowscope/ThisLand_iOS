@@ -36,6 +36,7 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        world.update(dt: currentTime)
     }
     
     func addPoints(pointA: CGPoint, pointB: CGPoint) -> CGPoint {
@@ -54,7 +55,14 @@ class GameScene: SKScene {
             for node in touchedNode {
                 if let name = node.name {
                     if name == "Tool_Worker" {
-                        uiManager.toolSelect(type: .WORKER)
+                        if uiManager.lastSelectedTile != nil {
+                            uiManager.toolSelect(type: .WORKER)
+                            if (uiManager.lastSelectedTile?.isWalkable)! == true {
+                                world.addPlayerEntity(at: (world.lastSelectionPoint)!, .WORKER)
+                            }
+                            uiManager.toolSelect(type: .WORKER)
+                            
+                        }
                         return
                     }
                 }
@@ -62,9 +70,7 @@ class GameScene: SKScene {
             
             if uiManager.isToolSelected {
                 if uiManager.toolSelected == .WORKER {
-                    let loc = (view?.convert(location, to: scene!))!
-                    let added = addPoints(pointA: mainCamera.position, pointB: loc)
-                    world.addPlayerEntity(at: added, .WORKER)
+                    
                     
                 }
             }
@@ -95,7 +101,7 @@ class GameScene: SKScene {
             mainCamera.position = newPosition
         }
         if sender.state == .ended {
-            world.showChunksAround(camera: mainCamera)
+            //world.showChunksAround(camera: mainCamera)
         }
     }
 }

@@ -16,8 +16,17 @@ class SpriteComponent: GKComponent {
         super.init()
         
         var tmp = position
+        
         tmp.x = floor(position.x)
         tmp.y = floor(position.y)
+        
+        if tmp.x < 0 {
+            tmp.x += 64
+        }
+        
+        if tmp.y < 0 {
+            tmp.y += 64
+        }
         
         sprite = SKSpriteNode(imageNamed: imageName)
         sprite.position = tmp

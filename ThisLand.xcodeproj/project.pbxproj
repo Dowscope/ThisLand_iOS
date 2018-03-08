@@ -22,6 +22,9 @@
 		933FCD4C203CB54E0033484E /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933FCD4B203CB54E0033484E /* SpriteComponent.swift */; };
 		9354CC68202A33B100E94B28 /* UIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354CC67202A33B100E94B28 /* UIManager.swift */; };
 		9354CC6A202A49E700E94B28 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354CC69202A49E700E94B28 /* Tile.swift */; };
+		93C599402050B87D00FE9479 /* JobComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C5993F2050B87D00FE9479 /* JobComponent.swift */; };
+		93C599432050BBDB00FE9479 /* MoveBehaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C599422050BBDB00FE9479 /* MoveBehaviour.swift */; };
+		93C599452050BCE400FE9479 /* MoveComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C599442050BCE400FE9479 /* MoveComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +66,9 @@
 		933FCD4B203CB54E0033484E /* SpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
 		9354CC67202A33B100E94B28 /* UIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIManager.swift; sourceTree = "<group>"; };
 		9354CC69202A49E700E94B28 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		93C5993F2050B87D00FE9479 /* JobComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobComponent.swift; sourceTree = "<group>"; };
+		93C599422050BBDB00FE9479 /* MoveBehaviour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveBehaviour.swift; sourceTree = "<group>"; };
+		93C599442050BCE400FE9479 /* MoveComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +119,7 @@
 		930FB3A4201EA8BF00BCDCA9 /* ThisLand */ = {
 			isa = PBXGroup;
 			children = (
+				93C599412050BBBB00FE9479 /* Behaviours */,
 				933FCD4A203CAB330033484E /* System */,
 				93288BB2203BBD9C00A35D43 /* Components */,
 				93288BB1203BBD8200A35D43 /* Entities */,
@@ -157,6 +164,8 @@
 			isa = PBXGroup;
 			children = (
 				933FCD4B203CB54E0033484E /* SpriteComponent.swift */,
+				93C5993F2050B87D00FE9479 /* JobComponent.swift */,
+				93C599442050BCE400FE9479 /* MoveComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -171,6 +180,14 @@
 				930FB3B4201EA8BF00BCDCA9 /* LaunchScreen.storyboard */,
 			);
 			path = System;
+			sourceTree = "<group>";
+		};
+		93C599412050BBBB00FE9479 /* Behaviours */ = {
+			isa = PBXGroup;
+			children = (
+				93C599422050BBDB00FE9479 /* MoveBehaviour.swift */,
+			);
+			path = Behaviours;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,7 +333,10 @@
 				933FCD4C203CB54E0033484E /* SpriteComponent.swift in Sources */,
 				930FB3A6201EA8BF00BCDCA9 /* AppDelegate.swift in Sources */,
 				93288BB0203BB81300A35D43 /* Player.swift in Sources */,
+				93C599452050BCE400FE9479 /* MoveComponent.swift in Sources */,
 				9354CC68202A33B100E94B28 /* UIManager.swift in Sources */,
+				93C599432050BBDB00FE9479 /* MoveBehaviour.swift in Sources */,
+				93C599402050B87D00FE9479 /* JobComponent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
